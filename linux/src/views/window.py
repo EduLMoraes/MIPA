@@ -4,16 +4,17 @@ from PIL import Image, ImageTk
 from src.views.styles import *
 from src.views.functions import *
 
-def resize_image(event):
-    width, height = event.width, event.height
-    resized_image = image.resize((width, height), Image.ANTIALIAS)
-    resized_photo = ImageTk.PhotoImage(resized_image)
-    canvas.itemconfig(image_item, image=resized_photo)
-    canvas.image = resized_photo
-    canvas.configure(width=width, height=height)
+#def resize_image(event):
+#    width, height = event.width, event.height
+#    resized_image = image.resize((width, height), Image.ANTIALIAS)
+#    resized_photo = ImageTk.PhotoImage(resized_image)
+#    canvas.itemconfig(image_item, image=resized_photo)
+#    canvas.image = resized_photo
+#    canvas.configure(width=width, height=height)
 
 def createWindow():
-    global image, canvas, image_item
+#    global image, image_item
+    global canvas
 
     window = Tk()
     window.title("myPDF.mp3")
@@ -23,10 +24,10 @@ def createWindow():
     canvas = Canvas(window, width=800, height=600)
     canvas.pack()
 
-    image = Image.open("./windows/src/images/background.jpeg")
-    image = image.resize((800, 600), Image.ANTIALIAS)
-    photo = ImageTk.PhotoImage(image)
-    image_item = canvas.create_image(0, 0, anchor='nw', image=photo)
+    #image = Image.open("./MIPA/linux/src/images/background.jpeg")
+    #image = image.resize((800, 600), Image.ANTIALIAS)
+    #photo = ImageTk.PhotoImage(image)
+    #image_item = canvas.create_image(0, 0, anchor='nw', image=photo)
 
     text = Label(canvas, text="transforme seu tempo em um áudio!".upper(), fg="white")
     txt_dir = Label(canvas, text="Salvar em:", fg="white")
@@ -55,6 +56,6 @@ def createWindow():
     if isOk():
         txt_finish.place(x=260, y=400)
 
-    canvas.bind('<Configure>', resize_image)
+#    canvas.bind('<Configure>', resize_image)
 
     return window
