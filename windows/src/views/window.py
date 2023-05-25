@@ -1,8 +1,17 @@
+import requests
 from tkinter import *
 from tkinter import ttk
 from PIL import Image, ImageTk
 from src.views.styles import *
 from src.views.functions import *
+from io import BytesIO
+
+def download_image(url):
+    response = requests.get(url)
+    image_data = response.content
+    image = Image.open(BytesIO(image_data))
+    return image
+
 
 def resize_image(event):
     width, height = event.width, event.height
@@ -13,7 +22,8 @@ def resize_image(event):
     canvas.configure(width=width, height=height)
 
 def createWindow():
-    global image, canvas, image_item
+    global image, image_item
+    global canvas
 
     window = Tk()
     window.title("myPDF.mp3")
@@ -23,7 +33,9 @@ def createWindow():
     canvas = Canvas(window, width=800, height=600)
     canvas.pack()
 
-    image = Image.open("./windows/src/images/background.jpeg")
+
+    image_url = "https://github.com/EduardoMoreaes/MIPA/blob/master/linux/src/images/background.jpeg?raw=true"
+    image = download_image(image_url)
     image = image.resize((800, 600), Image.ANTIALIAS)
     photo = ImageTk.PhotoImage(image)
     image_item = canvas.create_image(0, 0, anchor='nw', image=photo)
