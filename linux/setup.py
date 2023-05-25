@@ -8,7 +8,9 @@ includes = [
     'PyPDF2',
     'gtts',
     'time',
-    'PIL'
+    'PIL',
+    'io',
+    'requests'
 ]
 
 
